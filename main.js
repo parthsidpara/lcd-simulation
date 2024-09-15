@@ -9,13 +9,26 @@ async function initializeApp() {
   const displayElement = document.getElementById('lcd-display');
   const displayController = new DisplayController(displayElement, characterFactory);
 
+  const textInput = document.getElementById('text-input');
+
   document.getElementById('update-button').addEventListener('click', () => {
-    const input = document.getElementById('text-input');
-    displayController.updateDisplay(input.value);
+    displayController.setText(textInput.value);
+    textInput.value = ''; //clear input field after updating lcd
   });
 
+  document.getElementById('up-button').addEventListener('click', () => displayController.moveCursor('up'));
+  document.getElementById('down-button').addEventListener('click', () => displayController.moveCursor('down'));
+  document.getElementById('left-button').addEventListener('click', () => displayController.moveCursor('left'));
+  document.getElementById('right-button').addEventListener('click', () => displayController.moveCursor('right'));
+
+  // clear button
+  document.getElementById('clear-button').addEventListener('click', () => {
+    displayController.clearDisplay();
+    textInput.value = '';
+  })
+
   // Initialize display
-  displayController.updateDisplay('');
+  displayController.updateDisplay();
 }
 
 initializeApp();

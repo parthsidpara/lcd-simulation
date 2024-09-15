@@ -17,7 +17,7 @@ body {
 .lcd-display {
     display: grid;
     grid-template-columns: repeat(16, auto);
-    gap: 4px; /* space between characters */
+    gap: 4px;
     background-color: #1a202c;
     padding: 20px;
     border: 2px solid #4a5568;
@@ -28,8 +28,8 @@ body {
 .character {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(7, 1fr);
-    gap: 1.4px; /* spacing between the pixels */
+    grid-template-rows: repeat(8, 1fr);
+    gap: 1.4px;
 }
 
 .pixel {
@@ -38,7 +38,8 @@ body {
     background-color: #396b3bd8;
 }
 
-.pixel.on {
+.pixel.on,
+.cursor {
     background-color: #d03131;
 }
 
@@ -57,8 +58,51 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 button:hover {
     background-color: #3182ce;
+}
+
+.cursor-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.cursor-controls button {
+    font-size: 18px;
+    padding: 5px;
+}
+
+#up-button {
+    grid-column: 2;
+}
+
+#left-button {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#right-button {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+#down-button {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.cursor {
+    grid-row: 8;
+    grid-column: 1 / span 5;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
 }
